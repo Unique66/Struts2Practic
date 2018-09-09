@@ -23,7 +23,7 @@ public class Test extends ActionSupport{
     }
     public String add(){
         System.out.println("add 执行");
-        request.setAttribute("path","update");
+        request.setAttribute("path","update");//测试ognl方式跳转页面
         return "add";
     }
     public String update(){
