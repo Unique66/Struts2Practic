@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+        "http://struts.apache.org/dtds/struts-2.3.dtd">
+<!--
+    1.访问servlet API
+    2.Action搜索顺序
+    3.动态方法调用   一个方法多个请求
+        ①指定method属性
+        ②感叹号方式
+        ③通配符方式
+    4.指定多个配置文件
+    5.默认Action
+    6.Struts2后缀
+    7.接收参数
+        ①使用action属性接收   直接在action.java里设置私有对象，提供getter/setter方法
+        ②使用DomainModel接收    在action.java里设置私有对象，提供getter/setter方法
+        ③使用ModelDriven接收    action.java实现ModelDriven类  注：ModelDriven的泛型需要实例化，也就是new
+    8.处理结果类型
+
+    OGNL:Object-Graph Navigation Language
+-->
+<struts>
+    <!--4.指定多个配置文件-->
+    <include file="action1.xml" ></include>
+
+    <!--6.Struts2 后缀，也可以在struts.properties 里设置，也可以在web.xml里init-param标签设置-->
+    <!--<constant name="struts.action.extension" value="do"></constant>-->
+
+    <!--5.默认action使用-->
+    <!--<package name="default" namespace="/" extends="struts-default">
+        <default-action-ref name="index"></default-action-ref>
+        <action name="index">
+            <result>error.jsp</result>
+        </action>
+    </package>-->
+
+    <!--3.2 感叹号方式  不推荐使用-->
+    <constant name="struts.enable.DynamicMethodInvocation" value="false"></constant>
+    <!--编码-->
+    <constant name="struts.i18n.encoding" value="UTF-8"></constant>
+</struts>

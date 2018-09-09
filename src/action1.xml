@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+        "http://struts.apache.org/dtds/struts-2.3.dtd">
+<!--
+    1.访问servlet API
+    2.Action搜索顺序
+    3.动态方法调用   一个方法多个请求
+        ①指定method属性
+        ②感叹号方式
+        ③通配符方式
+    4.指定多个配置文件
+    5.默认Action
+    6.Struts2后缀
+    7.接收参数
+    8.处理结果类型
+-->
+<struts>
+    <package name="default" namespace="/" extends="struts-default">
+        <!--5.默认action使用-->
+        <default-action-ref name="index"></default-action-ref>
+        <action name="index">
+            <result>error.jsp</result>
+        </action>
+
+        <!--3.3通配符方式-->
+        <action name="helloworld_*" method="{1}" class="com.sxh.struts.Test">
+            <result>/result.jsp</result>
+            <!--测试ognl-->
+            <result name="add">
+                <param name="location">
+                    /${#request.path}.jsp
+                </param>
+            </result>
+            <result name="update">/{1}.jsp</result>
+        </action>
+
+        <action name="loginaction_*" method="{1}" class="com.sxh.struts.LoginAction">
+            <result>success.jsp</result>
+            <result name="input">login.jsp</result>
+        </action>
+
+        <!--3.1 指定method属性方式   url:localhost:8080/add   -->
+        <!--<action name="add" method="add" class="com.sxh.struts.Test">
+            <result>/add.jsp</result>
+        </action>
+
+        <action name="update" method="update" class="com.sxh.struts.Test">
+            <result>/update.jsp</result>
+        </action>-->
+    </package>
+
+    <!--3.2 感叹号方式  不推荐使用-->
+    <constant name="struts.enable.DynamicMethodInvocation" value="false"></constant>
+</struts>
